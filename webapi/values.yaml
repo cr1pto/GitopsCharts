@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: https://github.com/cr1pto/GitopsCharts
+  repository: https://github.com/cr1pto/DotnetSample
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
