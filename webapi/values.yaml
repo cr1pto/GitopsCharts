@@ -14,6 +14,11 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
+ports:
+- name: liveness-port
+  containerPort: 5282
+  hostPort: 5282
+
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
@@ -72,8 +77,16 @@ autoscaling:
   enabled: false
   minReplicas: 1
   maxReplicas: 100
-  targetCPUUtilizationPercentage: 80
+  targetCPUUtilizationPercentage: 30
   # targetMemoryUtilizationPercentage: 80
+ livenessProbe:
+      httpGet:
+        path: /healthz
+        port: liveness-port
+      failureThreshold: 1
+      periodSeconds: 60
+      # Override pod-level terminationGracePeriodSeconds #
+      terminationGracePeriodSeconds: 60
 
 nodeSelector: {}
 
