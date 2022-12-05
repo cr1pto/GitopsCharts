@@ -1,11 +1,11 @@
-# Default values for webapi.
+# Default values for sample.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
 image:
-  repository: https://github.com/cr1pto/DotnetSample
+  repository: nginx
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
@@ -21,7 +21,7 @@ serviceAccount:
   annotations: {}
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
-  name: "webapi"
+  name: ""
 
 podAnnotations: {}
 
@@ -38,7 +38,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 5282
+  port: 80
 
 ingress:
   enabled: false
@@ -72,16 +72,8 @@ autoscaling:
   enabled: false
   minReplicas: 1
   maxReplicas: 100
-  targetCPUUtilizationPercentage: 30
+  targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
-livenessProbe:
-  httpGet:
-    path: /healthz
-    port: liveness-port
-  failureThreshold: 1
-  periodSeconds: 60
-  # Override pod-level terminationGracePeriodSeconds #
-  terminationGracePeriodSeconds: 60
 
 nodeSelector: {}
 
